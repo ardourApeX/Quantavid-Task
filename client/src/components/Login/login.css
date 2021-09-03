@@ -1,11 +1,11 @@
-.login-page {
+.auth-page {
 	height: 100vh;
 	width: 100%;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
 }
-.login-parent-card {
+.auth-parent-card {
 	width: 35%;
 	height: 500px;
 	display: flex;
@@ -16,19 +16,19 @@
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
-.login-parent-card h1 {
+.auth-parent-card h1 {
 	text-align: center;
 	color: var(--primary-color);
 	font-size: 50px;
 }
-.login-input {
+.auth-input {
 	border-radius: 10px;
 	width: 100%;
 	padding: 1rem;
 	font-size: large;
 	border: 1px solid rgb(206, 200, 200);
 }
-.login-button {
+.primary-auth {
 	padding: 1rem;
 	background-color: var(--primary-color);
 	border-radius: 10px;
@@ -37,8 +37,9 @@
 	font-size: large;
 	border-color: transparent;
 	cursor: pointer;
+	margin-bottom: -20px;
 }
-.login-signup {
+.auth-signup {
 	padding: 1rem;
 	border-radius: 10px;
 	border-color: transparent;
@@ -49,11 +50,11 @@
 	font-size: large;
 	cursor: pointer;
 }
-.login-input:focus {
+.auth-input:focus {
 	background-color: #faf8f4;
 	border-color: transparent;
 }
-.login-signup:hover {
+.auth-signup:hover {
 	background-color: var(--secondary-color);
 	color: white;
 }
@@ -71,34 +72,34 @@
 	top: 10px;
 }
 @media screen and (max-width: 1200px) {
-	.login-parent-card {
+	.auth-parent-card {
 		width: 50%;
 	}
 }
 @media screen and (max-width: 960px) {
-	.login-input {
+	.auth-input {
 		padding: 10px;
 	}
-	.login-parent-card h1 {
+	.auth-parent-card h1 {
 		font-size: 40px;
 	}
-	.login-parent-card {
+	.auth-parent-card {
 		width: 50%;
 	}
-	.login-button {
+	.primary-auth {
 		padding: 10px;
 	}
-	.login-signup {
+	.secondary-auth {
 		padding: 10px;
 	}
 }
 @media screen and (max-width: 768px) {
-	.login-parent-card {
+	.auth-parent-card {
 		width: 70%;
 	}
 }
 @media screen and (max-width: 500px) {
-	.login-parent-card {
+	.auth-parent-card {
 		width: 90%;
 		height: 550;
 		padding: 2rem;

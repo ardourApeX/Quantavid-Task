@@ -1,0 +1,49 @@
+#signup-card {
+	height: 600px;
+}
+
+.toggle-password {
+	display: flex;
+	width: 130px;
+	justify-content: space-between;
+	align-items: center;
+}
+.redirect-to-login {
+	margin-top: -20px;
+	display: flex;
+}
+hr {
+	margin: 1rem 0;
+}
+.redirect-to-login a {
+	color: var(--secondary-color);
+	text-decoration: none;
+	margin-left: 10px;
+}
+.redirect-to-login a:hover {
+	text-decoration: underline;
+}
+@media screen and (max-width: 1200px) {
+	#signup-card {
+		width: 50%;
+	}
+}
+@media screen and (max-width: 960px) {
+	#signup-card {
+		width: 50%;
+	}
+}
+@media screen and (max-width: 768px) {
+	#signup-card {
+		width: 70%;
+	}
+}
+@media screen and (max-width: 500px) {
+	#signup-card {
+		width: 90%;
+		height: 550;
+		padding: 2rem;
+	}
+}
+@media screen and (min-width: 320px) {
+}
