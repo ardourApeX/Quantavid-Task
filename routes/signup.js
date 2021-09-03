@@ -12,11 +12,9 @@ signupRoute.post(
 	signupParamsCheck,
 	emailValidation,
 	async function (request, response) {
-		console.log("#########", users);
 		const { name, email, password } = request.body;
 		try {
 			const encryptedPassword = await encryption(password);
-			console.log("########", encryptedPassword);
 			if (encryptedPassword.success) {
 				users.push({
 					id: users.length + 1,
@@ -24,7 +22,6 @@ signupRoute.post(
 					email,
 					password: encryptedPassword.hash,
 				});
-				console.log("#########", users);
 				response
 					.status(200)
 					.send({ success: true, message: "successful signup" });

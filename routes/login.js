@@ -8,6 +8,7 @@ const { ACCESS_TOKEN } = require("../contants");
 const loginRoute = express.Router();
 loginRoute.use(jsonParser);
 loginRoute.post("/", loginMiddleware, async function (request, response) {
+	
 	try {
 		const loginUser = request.loginUser;
 		const { password: userEnteredPassword } = request.body;
@@ -24,7 +25,11 @@ loginRoute.post("/", loginMiddleware, async function (request, response) {
 			const accessToken = jwt.sign(payload, ACCESS_TOKEN);
 			response.status(200).send({
 				success: true,
-				accessToken,
+				data: {
+					accessToken,
+					id: payload.id,
+				},
+
 				message: "User successfully logged in",
 			});
 		} else if (validation.success && !validation.result) {
@@ -41,7 +46,5 @@ loginRoute.post("/", loginMiddleware, async function (request, response) {
 			message: error.message,
 		});
 	}
-
-	response.status(200).send({ success: true, message: "Testing Done" });
 });
 exports.loginRoute = loginRoute;
