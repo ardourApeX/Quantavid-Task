@@ -1,17 +1,25 @@
 import "./login.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useSelector, useDispatch } from "react-redux";
+import { loggedInUser } from "../../features/login/authSlice";
 export default function Login() {
+	const navigate = useNavigate();
 	const [passwordVisibility, setPasswordVisibility] = useState(false);
 	const [userInput, setUserInput] = useState({});
+	const dispatch = useDispatch();
+	const state = useSelector((state) => state.auth);
+	if (state.autStatus === "fulfilled") {
+		navigate("/");
+	}
 	return (
 		<div className="auth-page">
 			<div className="auth-parent-card">
 				<h1>Login</h1>
 				<input
 					onChange={(event) => {
-						setUserInput({ ...userInput, name: event.target.value });
+						setUserInput({ ...userInput, email: event.target.value });
 					}}
 					className="auth-input"
 					placeholder="Enter your email"
@@ -21,7 +29,7 @@ export default function Login() {
 					{" "}
 					<input
 						onChange={(event) =>
-							setUserInput({ ...userInput, password: event.target.vale })
+							setUserInput({ ...userInput, password: event.target.value })
 						}
 						className="auth-input"
 						placeholder="Enter your password"
@@ -39,7 +47,12 @@ export default function Login() {
 					</span>
 				</div>
 
-				<button className="primary-auth">Login </button>
+				<button
+					onClick={() => dispatch(loggedInUser(userInput))}
+					className="primary-auth"
+				>
+					Login{" "}
+				</button>
 				<hr />
 
 				<Link to={{ pathname: "/signup" }}>

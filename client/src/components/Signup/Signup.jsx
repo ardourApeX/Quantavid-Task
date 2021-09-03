@@ -1,9 +1,19 @@
 import "./signup.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signupUser } from "../../features/login/authSlice";
+import { useEffect } from "react";
 export default function Signup() {
+	const navigate = useNavigate();
 	const [visibility, setVisibility] = useState(false);
 	const [userInput, setUserInput] = useState({});
+	const dispatch = useDispatch();
+	const state = useSelector((state) => state.auth);
+	if (state.authStatus === "fulfilled") {
+		navigate("/login");
+	}
+
 	return (
 		<div className="auth-page">
 			<div className="auth-parent-card" id="signup-card">
@@ -49,7 +59,12 @@ export default function Signup() {
 					></input>
 					<span>Show Password</span>
 				</div>
-				<button className="primary-auth">Signup</button>
+				<button
+					onClick={() => dispatch(signupUser(userInput))}
+					className="primary-auth"
+				>
+					Signup
+				</button>
 				<hr />
 				<div className="redirect-to-login">
 					<p>Already have an account?</p>{" "}
