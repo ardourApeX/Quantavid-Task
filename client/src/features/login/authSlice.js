@@ -68,6 +68,7 @@ const authSlice = createSlice({
 				"accessToken",
 				JSON.stringify(action.payload.data.accessToken)
 			);
+			localStorage.setItem("isUserLogin", JSON.stringify(true));
 			state.authStatus = "fulfilled";
 		},
 		[loggedInUser.rejected]: (state, action) => {
