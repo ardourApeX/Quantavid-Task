@@ -1,0 +1,21 @@
+### Signup Check
+POST http://localhost:5000/signup
+Content-Type: application/json
+
+{
+    "name" : "Joy Gupta",
+    "email" : "joygupta501@gmail.com",
+    "password" : "Admingupta@123"
+}
+
+### Login Check
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email" : "joygupta501@gmail.com",
+    "password" : "Admingupta@123"
+}
+
+###User
+GET http://localhost:5000/users
