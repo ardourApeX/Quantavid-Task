@@ -1,20 +1,41 @@
 import "./signup.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 export default function Signup() {
 	const [visibility, setVisibility] = useState(false);
-	console.log(visibility);
+	const [userInput, setUserInput] = useState({});
 	return (
 		<div className="auth-page">
 			<div className="auth-parent-card" id="signup-card">
 				<h1>Signup</h1>
-				<input className="auth-input" placeholder="Name" type="text" />
-				<input className="auth-input" placeholder="Enail" type="text" />
 				<input
+					onChange={(event) =>
+						setUserInput({ ...userInput, name: event.target.value })
+					}
+					className="auth-input"
+					placeholder="Name"
+					type="text"
+				/>
+				<input
+					onChange={(event) =>
+						setUserInput({ ...userInput, email: event.target.value })
+					}
+					className="auth-input"
+					placeholder="Email"
+					type="text"
+				/>
+				<input
+					onChange={(event) =>
+						setUserInput({ ...userInput, password: event.target.value })
+					}
 					className="auth-input"
 					placeholder="Password"
 					type={visibility ? "text" : "password"}
 				/>
 				<input
+					onChange={(event) =>
+						setUserInput({ ...userInput, confirmPassword: event.target.value })
+					}
 					className="auth-input"
 					placeholder="Confirm Password"
 					type={visibility ? "text" : "password"}
@@ -32,9 +53,15 @@ export default function Signup() {
 				<hr />
 				<div className="redirect-to-login">
 					<p>Already have an account?</p>{" "}
-					<a href="/login" className="login-redirect">
+					<Link
+						className="login-redirect"
+						to={{
+							pathname: "/login",
+						}}
+					>
+						{" "}
 						Login here
-					</a>
+					</Link>
 				</div>
 			</div>
 		</div>

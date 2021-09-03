@@ -15,12 +15,12 @@
 hr {
 	margin: 1rem 0;
 }
-.redirect-to-login a {
+.redirect-to-login .login-redirect {
 	color: var(--secondary-color);
 	text-decoration: none;
 	margin-left: 10px;
 }
-.redirect-to-login a:hover {
+.redirect-to-login .login-redirect:hover {
 	text-decoration: underline;
 }
 @media screen and (max-width: 1200px) {

@@ -40,6 +40,7 @@
 	margin-bottom: -20px;
 }
 .auth-signup {
+	width: 100%;
 	padding: 1rem;
 	border-radius: 10px;
 	border-color: transparent;
