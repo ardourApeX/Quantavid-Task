@@ -11,7 +11,6 @@ export const loggedInUser = createAsyncThunk(
 					password: userInfo.password,
 				}
 			);
-			console.log(serverResponse);
 			return serverResponse.data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
@@ -21,7 +20,6 @@ export const loggedInUser = createAsyncThunk(
 export const signupUser = createAsyncThunk(
 	"/auth/signup",
 	async (userInfo, thunkAPI) => {
-		console.log("##################", userInfo);
 		try {
 			const serverResponse = await axios.post(
 				process.env.REACT_APP_URL + "/signup",
@@ -31,7 +29,6 @@ export const signupUser = createAsyncThunk(
 					password: userInfo.password,
 				}
 			);
-			console.log(serverResponse);
 			return serverResponse.data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data);
@@ -58,11 +55,8 @@ const authSlice = createSlice({
 			state.authStatus = "loading";
 		},
 		[loggedInUser.fulfilled]: (state, action) => {
-			console.log(action.payload);
 			state.authState.accessToken = action.payload.data.accessToken;
 			state.authState.id = action.payload.data.id;
-			console.log("###", action.payload.data.id);
-			console.log("###", action.payload.data.accessToken);
 			localStorage.setItem("userId", JSON.stringify(action.payload.data.id));
 			localStorage.setItem(
 				"accessToken",
@@ -82,7 +76,6 @@ const authSlice = createSlice({
 			state.authStatus = "loading";
 		},
 		[signupUser.fulfilled]: (state, action) => {
-			console.log("Signup successful");
 			state.authStatus = "fulfilled";
 			state.authState = {};
 		},

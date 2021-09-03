@@ -1,18 +1,20 @@
 import "./dashboard.css";
 import logo from "../../images/logo.png";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { logout } from "../../features/login/authSlice";
 export default function Dashboard() {
 	const [userUpload, setUserUpload] = useState("");
 	const [isUserLogin, setUserLogin] = useState(
 		JSON.parse(localStorage.getItem("isUserLogin"))
 	);
+	const dispatch = useDispatch();
 	function checkFileType(event) {
 		const types = ["png", "jpg", "jpeg", "mp4", "webp", "mp3"];
 		let type = event.target.value.split(".");
-		console.log("#########", event.target.value);
 		type = type[type.length - 1];
-		console.log("@@@@@@@@@@@", type);
 		setUserUpload(type in types);
 	}
 	function uploadFileToServer() {
@@ -23,9 +25,22 @@ export default function Dashboard() {
 	}
 	function ToggleLogin() {
 		if (isUserLogin !== null) {
-			return <div className="toggle-button">Logout</div>;
+			return (
+				<div
+					onClick={() => {
+						dispatch(logout());
+					}}
+					className="toggle-button"
+				>
+					Logout
+				</div>
+			);
 		}
-		return <div className="toggle-button">Login</div>;
+		return (
+			<Link to={{ pathname: "/login" }}>
+				/<div className="toggle-button">Login</div>
+			</Link>
+		);
 	}
 
 	return (
