@@ -29,24 +29,32 @@ export default function Dashboard() {
 	}
 
 	return (
-		<>
-			<div className="dashboard-parent">
+		<div className="dashboard-parent">
+			<div>
 				<nav className="navbar">
 					<img className="logo" src={logo} alt="Logo" />
 					<ToggleLogin />
 				</nav>
 			</div>
-			<input
-				className="file-place"
-				onChange={(event) => checkFileType(event)}
-				type="file"
-				id="img"
-				name="img"
-				accept="audio/*,video/*,image/*"
-			/>
-			<button className="upload-button" onClick={uploadFileToServer}>
-				Upload
-			</button>
-		</>
+			<div className="dashboard-content">
+				<div className="upload-area">
+					<h1>Upload Files here</h1>
+					<strong>File must be of type : Audio, Video and Images</strong>
+					<div>
+						<input
+							className="file-place"
+							onChange={(event) => checkFileType(event)}
+							type="file"
+							id="img"
+							name="img"
+							accept="audio/*,video/*,image/*"
+						/>
+						<button className="upload-button" onClick={uploadFileToServer}>
+							Upload
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	);
 }

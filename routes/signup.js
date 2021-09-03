@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const { signupParamsCheck, emailValidation } = require("../middlewares");
 const { encryption } = require("../utils/encryption");
 const signupRoute = express.Router();
+const { createFolderByName } = require("../utils/createFolderByName");
 signupRoute.use(jsonParser);
 signupRoute.post(
 	"/",
@@ -22,6 +23,9 @@ signupRoute.post(
 					email,
 					password: encryptedPassword.hash,
 				});
+
+				await createFolderByName(name);
+
 				response
 					.status(200)
 					.send({ success: true, message: "successful signup" });
