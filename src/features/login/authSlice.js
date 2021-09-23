@@ -13,6 +13,7 @@ export const loggedInUser = createAsyncThunk(
 			);
 			return serverResponse.data;
 		} catch (error) {
+			//To return the exact error message
 			return thunkAPI.rejectWithValue(error.response.data);
 		}
 	}
@@ -31,12 +32,16 @@ export const signupUser = createAsyncThunk(
 			);
 			return serverResponse.data;
 		} catch (error) {
+			//To return the exact error message
 			return thunkAPI.rejectWithValue(error.response.data);
 		}
 	}
 );
 const initialAuthState = {
-	authState: {},
+	authState: {
+		accessToken: JSON.parse(localStorage.getItem("accessToken")),
+		id: JSON.parse(localStorage.getItem("userId")),
+	},
 	authStatus: "idle",
 	authError: null,
 };
@@ -46,14 +51,17 @@ const authSlice = createSlice({
 	initialState: initialAuthState,
 	reducers: {
 		logout: (state) => {
-			state.authSlice = [];
+			state.authState = { accessToken: null, id: null };
 			localStorage.clear();
+			state.authStatus = "fulfilled";
 		},
 	},
 	extraReducers: {
+		//Login
 		[loggedInUser.pending]: (state) => {
 			state.authStatus = "loading";
 		},
+
 		[loggedInUser.fulfilled]: (state, action) => {
 			state.authState.accessToken = action.payload.data.accessToken;
 			state.authState.id = action.payload.data.id;
@@ -65,6 +73,7 @@ const authSlice = createSlice({
 			localStorage.setItem("isUserLogin", JSON.stringify(true));
 			state.authStatus = "fulfilled";
 		},
+
 		[loggedInUser.rejected]: (state, action) => {
 			state.authStatus = "rejected";
 			state.authError = action.error.message;
@@ -72,13 +81,17 @@ const authSlice = createSlice({
 			state.authState = {};
 			localStorage.clear();
 		},
+
+		//Sign-in
 		[signupUser.pending]: (state) => {
 			state.authStatus = "loading";
 		},
+
 		[signupUser.fulfilled]: (state, action) => {
 			state.authStatus = "fulfilled";
 			state.authState = {};
 		},
+
 		[signupUser.rejected]: (state, action) => {
 			console.log(action.error.message);
 			state.authStatus = "rejected";

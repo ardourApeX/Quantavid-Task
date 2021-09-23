@@ -1,17 +1,28 @@
 import "./login.css";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loggedInUser } from "../../features/login/authSlice";
+import { useNavigate, useLocation } from "react-router-dom";
 export default function Login() {
+	const { state } = useLocation();
 	const navigate = useNavigate();
+
 	const [passwordVisibility, setPasswordVisibility] = useState(false);
 	const [userInput, setUserInput] = useState({});
+
+	const loginStatus = useSelector((state) => state.auth.authStatus);
 	const dispatch = useDispatch();
-	const state = useSelector((state) => state.auth);
-	if (state.autStatus === "fulfilled") {
-		navigate("/");
+
+	function loginButtonHandler(userInput) {
+		//This function is to retrace the user to its previous private route,
+		//if any other wise to /
+		
+		dispatch(loggedInUser(userInput));
+		if (loginStatus === "fulfilled") {
+			navigate(state === null ? "/" : state.from);
+		}
 	}
 	return (
 		<div className="auth-page">
@@ -48,7 +59,7 @@ export default function Login() {
 				</div>
 
 				<button
-					onClick={() => dispatch(loggedInUser(userInput))}
+					onClick={() => loginButtonHandler(userInput)}
 					className="primary-auth"
 				>
 					Login{" "}
