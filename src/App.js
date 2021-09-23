@@ -1,5 +1,6 @@
 import "./App.css";
-import { Login, Signup, Dashboard } from "./components";
+import { Dashboard } from "./components";
+import { Login, Signup } from "./pages";
 import { Route, Routes } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 function App() {

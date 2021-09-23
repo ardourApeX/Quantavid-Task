@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signupUser } from "../../features/login/authSlice";
-import { useEffect } from "react";
 export default function Signup() {
 	const navigate = useNavigate();
 	const [visibility, setVisibility] = useState(false);
