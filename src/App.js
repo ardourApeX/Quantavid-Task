@@ -1,13 +1,14 @@
 import "./App.css";
 import { Login, Signup, Dashboard } from "./components";
 import { Route, Routes } from "react-router-dom";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 function App() {
 	return (
 		<div className="App">
 			<Routes>
-				<Route end path="/">
+				<PrivateRoute path="/">
 					<Dashboard />
-				</Route>
+				</PrivateRoute>
 				<Route path="/login">
 					<Login />
 				</Route>
